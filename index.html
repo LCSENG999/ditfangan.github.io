@@ -1,0 +1,735 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地铁车站明挖法施工基坑监测专项施工方案</title>
+    <!-- 引入Tailwind CSS CDN，适配GitHub Pages直接加载 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0969da', // GitHub风格的主蓝色
+                        secondary: '#24292f', // GitHub文本色
+                        neutral: '#f6f8fa', // GitHub背景色
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card-shadow {
+                box-shadow: 0 1px 3px 0 rgba(27, 31, 35, 0.1), 0 1px 2px 0 rgba(27, 31, 35, 0.06);
+            }
+            .section-title {
+                border-bottom: 2px solid #0969da;
+                padding-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral text-secondary">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- 页面标题 -->
+        <header class="mb-10 text-center">
+            <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-secondary mb-2">
+                <i class="fa fa-file-text text-primary mr-3"></i>地铁车站明挖法施工基坑监测专项施工方案
+            </h1>
+            <p class="text-lg text-gray-600">项目负责人版 · 全维度自动化监测施工管理方案</p>
+            <div class="w-24 h-1 bg-primary mx-auto mt-4 rounded"></div>
+        </header>
+
+        <!-- 目录导航 -->
+        <section class="mb-10">
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fa fa-list text-primary mr-2"></i>目录
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <a href="#section1" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">1</span>
+                        项目概况
+                    </a>
+                    <a href="#section2" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">2</span>
+                        监测目的
+                    </a>
+                    <a href="#section3" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">3</span>
+                        作业依据
+                    </a>
+                    <a href="#section4" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">4</span>
+                        监测主要工作内容
+                    </a>
+                    <a href="#section5" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">5</span>
+                        监测频率及控制指标
+                    </a>
+                    <a href="#section6" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">6</span>
+                        监测方法
+                    </a>
+                    <a href="#section7" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">7</span>
+                        信息化管理
+                    </a>
+                    <a href="#section8" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">8</span>
+                        预警报警机制和异常处理
+                    </a>
+                    <a href="#section9" class="flex items-center text-primary hover:underline">
+                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">9</span>
+                        质量保证体系
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. 项目概况 -->
+        <section id="section1" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                1. 项目概况
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <p class="mb-4">
+                    本项目为某地铁X号线XX站明挖法施工工程，车站主体采用明挖顺作法施工，当前为第2层土方开挖作业面。
+                    基坑深度约18m，围护结构采用800mm厚地下连续墙，内支撑采用Φ609钢支撑，共设置3道水平支撑。
+                </p>
+                <p class="mb-4">
+                    基坑周边环境复杂，西南侧紧邻28层高层住宅楼，基础为桩基础，距离基坑边线仅8.5m；东侧紧邻城市主干道，地下管线密集；
+                    南侧为项目临时办公区，北侧为施工临时便道。本工程施工周期长、难度大，受地质、荷载、施工及环境影响较大，
+                    支护结构与周边建（构）筑物对外界变形影响敏感，变形破坏机制复杂，一旦发生破坏后果严重。
+                </p>
+                <p>
+                    为保障基坑施工安全及周边环境安全，本项目采用"人工+自动化"结合的全维度监测方案，
+                    共部署13类监测设备，实现从基坑变形、内力到周边环境、施工环境的全维度实时监测，
+                    解决传统监测耗时长、恶劣天气无法作业、预警滞后的问题，实现信息化施工。
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. 监测目的 -->
+        <section id="section2" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                2. 监测目的
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start">
+                        <i class="fa fa-shield text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">保障基坑本体安全</h3>
+                            <p class="text-gray-600 text-sm">实时监测基坑围护结构、支撑体系的变形与内力，及时发现安全隐患，保障基坑施工全过程安全。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-home text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">保护周边环境安全</h3>
+                            <p class="text-gray-600 text-sm">监测周边建筑物、管线的沉降与变形，避免施工对周边环境造成影响，保障居民与管线安全。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-check-circle text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">验证设计参数</h3>
+                            <p class="text-gray-600 text-sm">通过监测数据验证支护结构设计的合理性，反馈设计参数，优化施工方案。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-line-chart text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">指导现场施工</h3>
+                            <p class="text-gray-600 text-sm">根据监测数据指导土方开挖、支撑安装的步序，实现信息化施工，保障施工效率。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-bell text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">提前预警风险</h3>
+                            <p class="text-gray-600 text-sm">建立预警机制，及时发现异常情况，提前采取措施，避免杭州湘湖站、佛山万科基坑这类安全事故的发生。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-file-text-o text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">留存过程资料</h3>
+                            <p class="text-gray-600 text-sm">完整留存监测过程数据，为工程验收、后续运维提供完整的过程资料。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 作业依据 -->
+        <section id="section3" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                3. 作业依据
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <ul class="space-y-2 text-gray-600">
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑基坑工程监测技术标准》GB 50497-2019</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《城市轨道交通工程测量规范》GB 50308-2017</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑变形测量规范》JGJ 8-2016</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑基坑支护技术规程》JGJ120－2012</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《深圳市基坑支护技术规范》SJG05-2011</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑地基基础设计规范》GBJ50007-2011</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《施工现场临时用电安全技术规范》JGJ 46-2005</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>《城市轨道交通工程安全质量管理暂行办法》</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>本项目的岩土工程勘察报告</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>本项目的基坑支护设计图纸、主体结构设计图纸</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>本项目的施工组织设计与专项施工方案</li>
+                    <li><i class="fa fa-check text-green-500 mr-2"></i>业主及监理单位的相关管理要求</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 4. 监测主要工作内容 -->
+        <section id="section4" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                4. 监测主要工作内容
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <p class="mb-4 text-gray-600">本次监测工作采用"人工+自动化"结合的模式，共部署13类监测设备，覆盖基坑本体、周边环境、施工环境三大类监测内容：</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 轴力计 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-arrows-v text-primary mr-2"></i>
+                            <h3 class="font-medium">轴力计</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测钢支撑的轴力，判断支撑受力是否稳定，排查失稳风险。</p>
+                    </div>
+                    <!-- 扬尘系统 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-cloud text-primary mr-2"></i>
+                            <h3 class="font-medium">扬尘监测系统</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">实时监测施工现场的PM2.5、PM10等扬尘指标，管控文明施工。</p>
+                    </div>
+                    <!-- 裂缝监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-minus text-primary mr-2"></i>
+                            <h3 class="font-medium">裂缝监测</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测周边建筑物、围护结构的裂缝发展，及时发现开裂风险。</p>
+                    </div>
+                    <!-- 全站仪 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-crosshairs text-primary mr-2"></i>
+                            <h3 class="font-medium">全站仪（测量机器人）</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测围护墙顶水平位移、立柱位移，实现高精度自动化位移测量。</p>
+                    </div>
+                    <!-- 倾角计 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-exchange text-primary mr-2"></i>
+                            <h3 class="font-medium">倾角计</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测钢支撑、格构柱的倾角变化，排查支撑倾斜失稳风险。</p>
+                    </div>
+                    <!-- 静力水准 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-tint text-primary mr-2"></i>
+                            <h3 class="font-medium">静力水准</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">自动化监测周边建筑物、立柱的沉降，实现高精度沉降测量。</p>
+                    </div>
+                    <!-- GNSS -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-map-marker text-primary mr-2"></i>
+                            <h3 class="font-medium">GNSS监测</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">自动化监测周边建筑物的三维位移，实时掌握建筑变形情况。</p>
+                    </div>
+                    <!-- 测斜 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-arrows-h text-primary mr-2"></i>
+                            <h3 class="font-medium">测斜仪</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测地下连续墙、周边土体的深层水平位移，掌握深层变形。</p>
+                    </div>
+                    <!-- 雨量计 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-umbrella text-primary mr-2"></i>
+                            <h3 class="font-medium">雨量计</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">实时监测降雨量，为降雨期间的基坑安全管控提供数据支撑。</p>
+                    </div>
+                    <!-- 水位计 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-water text-primary mr-2"></i>
+                            <h3 class="font-medium">水位计</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测基坑内外的地下水位变化，掌握水位波动对基坑的影响。</p>
+                    </div>
+                    <!-- 锚索 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-chain text-primary mr-2"></i>
+                            <h3 class="font-medium">锚索测力计</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测锚索的内力，判断锚索的受力状态，保障支护安全。</p>
+                    </div>
+                    <!-- 应变计 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-compress text-primary mr-2"></i>
+                            <h3 class="font-medium">应变计</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测围护结构、支撑的应变变化，掌握结构的受力变形。</p>
+                    </div>
+                    <!-- 钢筋计 -->
+                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-circle-o text-primary mr-2"></i>
+                            <h3 class="font-medium">钢筋计</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">监测围护结构、主体结构的钢筋内力，掌握钢筋的受力状态。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 监测频率及控制指标 -->
+        <section id="section5" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                5. 监测频率及控制指标
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <h3 class="font-medium mb-3">5.1 监测频率</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">施工阶段</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">监测频率</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-4 py-2 text-sm">土方开挖阶段</td>
+                                <td class="px-4 py-2 text-sm">1次/天，关键部位2次/天</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">开挖深度5~10m</td>
+                                <td class="px-4 py-2 text-sm">1次/天</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">开挖深度超过10m</td>
+                                <td class="px-4 py-2 text-sm">2次/天</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">开挖完成后7天内</td>
+                                <td class="px-4 py-2 text-sm">1次/2天</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">开挖完成后7~30天</td>
+                                <td class="px-4 py-2 text-sm">1次/周</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">开挖完成30天后</td>
+                                <td class="px-4 py-2 text-sm">1次/月，直至主体结构回填完成</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">支撑拆除期间</td>
+                                <td class="px-4 py-2 text-sm">1次/天，拆除完成后3天内</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-medium mb-3">5.2 监测控制指标</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">监测项目</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">累计控制值</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">速率控制值</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-4 py-2 text-sm">周边建筑物沉降</td>
+                                <td class="px-4 py-2 text-sm">≤20mm</td>
+                                <td class="px-4 py-2 text-sm">≤0.2mm/d</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">围护墙顶水平位移</td>
+                                <td class="px-4 py-2 text-sm">≤30mm</td>
+                                <td class="px-4 py-2 text-sm">≤3mm/d</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">围护结构深层水平位移</td>
+                                <td class="px-4 py-2 text-sm">≤40mm</td>
+                                <td class="px-4 py-2 text-sm">≤3mm/d</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">钢支撑轴力</td>
+                                <td class="px-4 py-2 text-sm">≤0.8fyk（设计值）</td>
+                                <td class="px-4 py-2 text-sm">≤10%设计值/天</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm">地下水位变化</td>
+                                <td class="px-4 py-2 text-sm">≤1000mm</td>
+                                <td class="px-4 py-2 text-sm">≤500mm/d</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 监测方法 -->
+        <section id="section6" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                6. 监测方法
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- GNSS监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-map-marker text-primary mr-2"></i>GNSS自动化监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            在周边建筑物顶部布设GNSS监测点，采用GNSS实时动态测量技术，实现24小时不间断的三维位移监测，
+                            采样频率1Hz，实时传输数据到监测平台，精度可达±2mm+1ppm。
+                        </p>
+                    </div>
+                    <!-- 测斜监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-arrows-h text-primary mr-2"></i>测斜监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            在地下连续墙内预埋测斜管，采用固定杆式测斜仪，逐段测量不同深度的水平位移，
+                            掌握围护结构的深层变形情况，测量精度可达±0.1mm/500mm，实现24小时实时监测。
+                        </p>
+                    </div>
+                    <!-- 轴力监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-arrows-v text-primary mr-2"></i>轴力计监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            在钢支撑端部安装振弦式轴力计，安装前进行标定，支撑安装完成后读取初始值，
+                            后续监测读取频率值，换算得到支撑的轴力，实时掌握支撑的受力状态，精度可达0.1%F.S。
+                        </p>
+                    </div>
+                    <!-- 静力水准监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-tint text-primary mr-2"></i>静力水准监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            采用连通管原理，在建筑物、立柱上布设静力水准测点，自动化监测各点的相对沉降，
+                            实现24小时不间断监测，测量精度可达±0.1mm，适合长距离的沉降监测。
+                        </p>
+                    </div>
+                    <!-- 全站仪监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-crosshairs text-primary mr-2"></i>测量机器人监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            采用徕卡TM50高精度全站仪，采用极坐标法测量围护结构顶、立柱的水平位移，
+                            实现自动照准、自动测量，24小时不间断监测，测角精度1″，测距精度1mm+1.5ppm。
+                        </p>
+                    </div>
+                    <!-- 水位监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-water text-primary mr-2"></i>水位计监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            在基坑内外布设水位观测孔，安装振弦式水位计，实时监测地下水位的变化，
+                            掌握水位的波动情况，为降水、降雨期间的安全管控提供数据，精度可达±0.1%F.S。
+                        </p>
+                    </div>
+                    <!-- 其他监测 -->
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-umbrella text-primary mr-2"></i>雨量、扬尘监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            安装一体化的环境监测站，集成雨量计、扬尘传感器，实时监测降雨量、PM2.5、PM10等指标，
+                            数据实时上传，为文明施工、降雨期安全管控提供支撑。
+                        </p>
+                    </div>
+                    <div class="p-4 border border-gray-100 rounded-lg">
+                        <h3 class="font-medium mb-2 flex items-center">
+                            <i class="fa fa-minus text-primary mr-2"></i>裂缝、倾角、应变监测
+                        </h3>
+                        <p class="text-gray-600 text-sm">
+                            采用振弦式传感器，在裂缝、支撑、结构上安装对应的监测设备，实时监测裂缝的发展、
+                            支撑的倾角、结构的应变，掌握结构的受力变形情况，及时发现异常。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 信息化管理 -->
+        <section id="section7" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                7. 信息化管理
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <p class="mb-4">本项目采用全自动化的监测信息化管理平台，实现监测数据的实时采集、传输、处理、展示与预警，同时配套手机APP实现移动管理，具体功能如下：</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-start">
+                        <i class="fa fa-wifi text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">实时数据传输</h3>
+                            <p class="text-gray-600 text-sm">所有自动化监测设备的数据，通过4G/5G网络实时传输到云端平台，延迟不超过1分钟，实现数据的实时同步。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-line-chart text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">数据可视化展示</h3>
+                            <p class="text-gray-600 text-sm">平台支持数据的可视化展示，包括变形曲线、内力曲线、历史数据对比，直观展示监测数据的变化趋势。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-file-text text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">自动报表生成</h3>
+                            <p class="text-gray-600 text-sm">平台自动生成日、周、月监测报表，自动整理数据、曲线，无需人工整理，提高工作效率。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-map text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">三维可视化展示</h3>
+                            <p class="text-gray-600 text-sm">结合VR全景模型，将监测数据叠加到全景模型中，直观展示各个测点的实时数据，实现沉浸式的监测数据查看。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-mobile text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">手机APP移动管理</h3>
+                            <p class="text-gray-600 text-sm">配套专属手机APP，支持项目查看、数据查询、曲线分析、巡检记录、报警管理，随时随地掌握项目情况。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-users text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">多端协同管理</h3>
+                            <p class="text-gray-600 text-sm">平台支持PC端、移动端、平板端的访问，项目负责人、监理、业主可以随时查看监测数据，实现协同管理。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-history text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">历史数据追溯</h3>
+                            <p class="text-gray-600 text-sm">所有监测数据都永久留存，支持历史数据的追溯、查询，为工程的全过程管理提供完整的数据支撑。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-book text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">知识库管理</h3>
+                            <p class="text-gray-600 text-sm">平台内置知识库，可上传规范、方案、培训资料，供监测人员学习，统一管理技术资料。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 预警报警机制和异常情况处理措施 -->
+        <section id="section8" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                8. 预警报警机制和异常情况处理措施
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <h3 class="font-medium mb-3">8.1 三级预警机制</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="p-4 border border-yellow-200 rounded-lg bg-yellow-50">
+                        <div class="text-center mb-2">
+                            <span class="inline-block px-3 py-1 bg-yellow-500 text-white rounded-full text-sm">黄色预警</span>
+                        </div>
+                        <p class="text-center text-sm">监测数据达到控制值的70%~80%</p>
+                        <p class="text-center text-gray-600 text-xs mt-2">注意关注，加密监测频率</p>
+                    </div>
+                    <div class="p-4 border border-orange-200 rounded-lg bg-orange-50">
+                        <div class="text-center mb-2">
+                            <span class="inline-block px-3 py-1 bg-orange-500 text-white rounded-full text-sm">橙色预警</span>
+                        </div>
+                        <p class="text-center text-sm">监测数据达到控制值的80%~100%</p>
+                        <p class="text-center text-gray-600 text-xs mt-2">预警提醒，分析原因，采取措施</p>
+                    </div>
+                    <div class="p-4 border border-red-200 rounded-lg bg-red-50">
+                        <div class="text-center mb-2">
+                            <span class="inline-block px-3 py-1 bg-red-500 text-white rounded-full text-sm">红色预警</span>
+                        </div>
+                        <p class="text-center text-sm">监测数据超过控制值</p>
+                        <p class="text-center text-gray-600 text-xs mt-2">紧急报警，停工整改，启动应急预案</p>
+                    </div>
+                </div>
+
+                <h3 class="font-medium mb-3">8.2 异常情况处理措施</h3>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-start">
+                        <i class="fa fa-bell text-primary mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-medium">预警通知：</span>
+                            当监测数据触发预警时，平台会自动通过短信、微信、平台消息、APP推送的方式，向项目负责人、监理、业主发送预警通知，确保第一时间收到信息。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-search text-primary mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-medium">原因排查：</span>
+                            收到预警后，立即组织技术人员到现场排查原因，复核监测数据的准确性，分析异常的诱因，判断风险的等级。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-pause text-primary mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-medium">施工暂停：</span>
+                            当触发橙色及以上预警时，立即暂停相关区域的施工作业，人员撤离到安全区域，避免风险扩大。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-wrench text-primary mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-medium">应急处置：</span>
+                            根据异常的原因，采取对应的应急措施，比如增加临时支撑、加快支撑安装、降水调整、注浆加固等，控制风险的发展。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-refresh text-primary mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-medium">加密监测：</span>
+                            异常处理期间，加密监测频率，实时监测数据的变化，评估处置措施的效果，直到数据恢复正常。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-medium">复盘总结：</span>
+                            异常处理完成后，组织复盘总结，分析异常的原因，总结经验，优化后续的施工与监测方案，避免类似问题再次发生。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 9. 质量保证体系、主要质量保证措施 -->
+        <section id="section9" class="mb-10">
+            <h2 class="text-xl font-semibold mb-4 section-title">
+                9. 质量保证体系、主要质量保证措施
+            </h2>
+            <div class="bg-white rounded-lg p-6 card-shadow">
+                <h3 class="font-medium mb-3">9.1 质量保证体系</h3>
+                <p class="text-gray-600 mb-4">
+                    建立以项目负责人为第一责任人的质量保证体系，明确各个岗位的质量职责，
+                    从人员、设备、流程、数据四个方面建立全流程的质量管控体系，保障监测工作的质量，
+                    避免出现杭州湘湖站这类监测失效、数据造假的问题。
+                </p>
+
+                <h3 class="font-medium mb-3">9.2 主要质量保证措施</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-start">
+                        <i class="fa fa-user text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">人员资质保证</h3>
+                            <p class="text-gray-600 text-sm">所有监测人员都具备相应的资质，持证上岗，经过专业的培训，熟悉监测的流程与规范，具备丰富的基坑监测经验。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-cog text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">设备校准保证</h3>
+                            <p class="text-gray-600 text-sm">所有监测设备都经过法定计量机构的校准，校准证书在有效期内，设备安装前进行标定，保障测量的准确性。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-check-square-o text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">流程质量保证</h3>
+                            <p class="text-gray-600 text-sm">严格按照规范的流程开展监测工作，测点安装、初始值读取、日常监测、数据处理都严格遵循规范要求，保障流程合规。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-database text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">数据审核保证</h3>
+                            <p class="text-gray-600 text-sm">所有监测数据都经过三级审核，监测人员自检、技术负责人复检、项目负责人终审，保障数据的准确性，杜绝数据造假。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-eye text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">现场巡检保证</h3>
+                            <p class="text-gray-600 text-sm">每天安排专人对监测设备进行巡检，检查设备的运行状态、供电、网络是否正常，及时发现设备的故障，保障设备正常运行。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-wrench text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">系统运维保证</h3>
+                            <p class="text-gray-600 text-sm">建立完善的系统运维方案，每季度进行预防性巡检，提供24小时应急响应，省内24小时、省外48小时到达现场，保障系统稳定。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-book text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">资料管理保证</h3>
+                            <p class="text-gray-600 text-sm">所有的监测资料都统一整理、归档，包括原始数据、报表、报告、设备校准证书等，保障资料的完整、可追溯。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa fa-life-ring text-primary text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">应急保障保证</h3>
+                            <p class="text-gray-600 text-sm">建立应急保障小组，准备充足的备品备件，针对高风险测点提前制定应急预案，保障设备故障时可以快速修复。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="text-center text-gray-500 text-sm">
+            <p class="mt-1">© 2026 地铁车站明挖法施工基坑监测专项方案</p>
+        </footer>
+    </div>
+
+    <!-- 平滑滚动脚本 -->
+    <script>
+        // 实现锚点的平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
