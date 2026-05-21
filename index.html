@@ -1,734 +1,684 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>地铁车站明挖法施工基坑监测专项施工方案</title>
-    <!-- 引入Tailwind CSS CDN，适配GitHub Pages直接加载 -->
+    <title>地铁车站明挖法施工VR全景监测项目 - 工程概况</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入Font Awesome图标CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <!-- 自定义Tailwind配置 -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0969da', // GitHub风格的主蓝色
-                        secondary: '#24292f', // GitHub文本色
-                        neutral: '#f6f8fa', // GitHub背景色
+                        primary: '#0969da',
+                        'primary-dark': '#0550ae',
+                        'primary-light': '#b6d4fe',
+                        secondary: '#24292f',
+                        neutral: '#f0f4f8',
+                        accent: '#1e6b5e',
+                        'accent-light': '#d1fae5',
                     },
                     fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', 'sans-serif'],
                     },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                    }
                 }
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .card-shadow {
-                box-shadow: 0 1px 3px 0 rgba(27, 31, 35, 0.1), 0 1px 2px 0 rgba(27, 31, 35, 0.06);
-            }
-            .section-title {
-                border-bottom: 2px solid #0969da;
-                padding-bottom: 0.5rem;
-            }
+    <style>
+        /* ===== Base ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; }
+
+        /* ===== Stagger animation ===== */
+        .stagger-1 { animation-delay: 0.05s; }
+        .stagger-2 { animation-delay: 0.1s; }
+        .stagger-3 { animation-delay: 0.15s; }
+        .stagger-4 { animation-delay: 0.2s; }
+        .stagger-5 { animation-delay: 0.25s; }
+        .stagger-6 { animation-delay: 0.3s; }
+
+        /* ===== Glass card ===== */
+        .glass-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* ===== Section header underline ===== */
+        .section-underline {
+            height: 3px;
+            width: 48px;
+            background: linear-gradient(90deg, #0969da, #1e6b5e);
+            border-radius: 2px;
+            margin-top: 8px;
+        }
+
+        /* ===== Feature icon ring ===== */
+        .icon-ring {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        /* ===== Task tag ===== */
+        .task-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== Back to top ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px; right: 32px;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0969da, #1e6b5e);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 16px rgba(9,105,218,0.35);
+            opacity: 0; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            transform: translateY(12px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(9,105,218,0.45); }
+
+        /* ===== Progress dots ===== */
+        .progress-dot { transition: all 0.3s; }
+
+        /* ===== Sticky nav ===== */
+        .sticky-nav {
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .sticky-nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-color: transparent;
+        }
+
+        /* ===== Card hover lift ===== */
+        .card-lift { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 640px) {
+            .back-to-top { bottom: 20px; right: 20px; width: 38px; height: 38px; font-size: 1rem; }
+        }
+        @media print {
+            .sticky-nav, .back-to-top { display: none !important; }
         }
     </style>
 </head>
 <body class="bg-neutral text-secondary">
+
+    <!-- ===== Back to Top ===== -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部">↑</button>
+
+    <!-- ===== Hero Header ===== -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-[#0a2647] via-[#144272] to-[#1e6b5e] text-white">
+        <!-- Decorative circles -->
+        <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/5 pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-20 w-96 h-96 rounded-full bg-white/[0.03] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/2 w-40 h-40 rounded-full bg-white/[0.04] pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 py-16 md:py-24 max-w-5xl relative z-10">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 text-sm mb-6 backdrop-blur-sm">
+                    <i class="fa fa-video-camera"></i>
+                    <span>VR全景沉浸式实训平台</span>
+                </div>
+                <h1 class="text-[clamp(2rem,5vw,3.2rem)] font-bold leading-tight mb-4">
+                    地铁车站明挖法施工
+                    <br>
+                    <span class="bg-gradient-to-r from-[#6bc5f7] to-[#5dd4b0] bg-clip-text text-transparent">VR全景监测项目</span>
+                </h1>
+                <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
+                    工程概况 · VR全景互动项目
+                </p>
+                <div class="flex flex-wrap justify-center gap-3 mt-6">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white/75 text-sm">
+                        <i class="fa fa-subway"></i> 明挖法施工
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white/75 text-sm">
+                        <i class="fa fa-shield"></i> 安全监测培训
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white/75 text-sm">
+                        <i class="fa fa-street-view"></i> 全景漫游
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom wave -->
+        <div class="absolute bottom-0 left-0 right-0 h-8 bg-neutral" style="clip-path: ellipse(70% 100% at 50% 100%);"></div>
+    </header>
+
+    <!-- ===== Sticky Navigation ===== -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky-nav" id="stickyNav">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="flex items-center gap-1 overflow-x-auto py-3 scrollbar-hide">
+                <a href="#project-info" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors whitespace-nowrap">
+                    <i class="fa fa-info-circle mr-1"></i>项目信息
+                </a>
+                <a href="#site-layout" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors whitespace-nowrap">
+                    <i class="fa fa-map-marker mr-1"></i>现场布局
+                </a>
+                <a href="#construction" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors whitespace-nowrap">
+                    <i class="fa fa-cog mr-1"></i>施工工艺
+                </a>
+                <a href="#vr-tasks" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors whitespace-nowrap">
+                    <i class="fa fa-tasks mr-1"></i>监测任务
+                </a>
+                <a href="#roam" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors whitespace-nowrap">
+                    <i class="fa fa-street-view mr-1"></i>漫游功能
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <!-- 页面标题 -->
-        <header class="mb-10 text-center">
-            <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-secondary mb-2">
-                <i class="fa fa-file-text text-primary mr-3"></i>地铁车站明挖法施工基坑监测专项施工方案
-            </h1>
-            <p class="text-lg text-gray-600">项目负责人版 · 全维度自动化监测施工管理方案</p>
-            <div class="w-24 h-1 bg-primary mx-auto mt-4 rounded"></div>
-        </header>
 
-        <!-- 目录导航 -->
-        <section class="mb-10">
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <h2 class="text-xl font-semibold mb-4 flex items-center">
-                    <i class="fa fa-list text-primary mr-2"></i>目录
-                </h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                    <a href="#section1" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">1</span>
-                        项目概况
-                    </a>
-                    <a href="#section2" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">2</span>
-                        监测目的
-                    </a>
-                    <a href="#section3" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">3</span>
-                        作业依据
-                    </a>
-                    <a href="#section4" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">4</span>
-                        监测主要工作内容
-                    </a>
-                    <a href="#section5" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">5</span>
-                        监测频率及控制指标
-                    </a>
-                    <a href="#section6" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">6</span>
-                        监测方法
-                    </a>
-                    <a href="#section7" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">7</span>
-                        信息化管理
-                    </a>
-                    <a href="#section8" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">8</span>
-                        预警报警机制和异常处理
-                    </a>
-                    <a href="#section9" class="flex items-center text-primary hover:underline">
-                        <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-2 text-sm">9</span>
-                        质量保证体系
-                    </a>
+        <!-- ===== 项目基本信息 ===== -->
+        <section id="project-info" class="mb-12 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="icon-ring bg-primary/10 text-primary">
+                    <i class="fa fa-info-circle text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">项目基本信息</h2>
+                    <div class="section-underline"></div>
                 </div>
             </div>
-        </section>
-
-        <!-- 1. 项目概况 -->
-        <section id="section1" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                1. 项目概况
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <p class="mb-4">
-                    本项目为某地铁X号线XX站明挖法施工工程，车站主体采用明挖顺作法施工，当前为第2层土方开挖作业面。
-                    基坑深度约18m，围护结构采用800mm厚地下连续墙，内支撑采用Φ609钢支撑，共设置3道水平支撑。
-                </p>
-                <p class="mb-4">
-                    基坑周边环境复杂，西南侧紧邻28层高层住宅楼，基础为桩基础，距离基坑边线仅8.5m；东侧紧邻城市主干道，地下管线密集；
-                    南侧为项目临时办公区，北侧为施工临时便道。本工程施工周期长、难度大，受地质、荷载、施工及环境影响较大，
-                    支护结构与周边建（构）筑物对外界变形影响敏感，变形破坏机制复杂，一旦发生破坏后果严重。
-                </p>
-                <p>
-                    为保障基坑施工安全及周边环境安全，本项目采用"人工+自动化"结合的全维度监测方案，
-                    共部署13类监测设备，实现从基坑变形、内力到周边环境、施工环境的全维度实时监测，
-                    解决传统监测耗时长、恶劣天气无法作业、预警滞后的问题，实现信息化施工。
-                </p>
-            </div>
-        </section>
-
-        <!-- 2. 监测目的 -->
-        <section id="section2" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                2. 监测目的
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex items-start">
-                        <i class="fa fa-shield text-primary text-xl mt-1 mr-3"></i>
+            <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-50">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-1 h-full min-h-[20px] bg-primary/30 rounded-full mt-1.5 flex-shrink-0"></div>
                         <div>
-                            <h3 class="font-medium">保障基坑本体安全</h3>
-                            <p class="text-gray-600 text-sm">实时监测基坑围护结构、支撑体系的变形与内力，及时发现安全隐患，保障基坑施工全过程安全。</p>
+                            <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">项目名称</span>
+                            <p class="font-semibold text-lg">某地铁X号线XX站工程</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-home text-primary text-xl mt-1 mr-3"></i>
+                    <div class="flex items-start gap-3">
+                        <div class="w-1 h-full min-h-[20px] bg-emerald-400/40 rounded-full mt-1.5 flex-shrink-0"></div>
                         <div>
-                            <h3 class="font-medium">保护周边环境安全</h3>
-                            <p class="text-gray-600 text-sm">监测周边建筑物、管线的沉降与变形，避免施工对周边环境造成影响，保障居民与管线安全。</p>
+                            <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">施工方法</span>
+                            <p class="font-semibold text-lg">明挖法施工</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-check-circle text-primary text-xl mt-1 mr-3"></i>
+                    <div class="flex items-start gap-3">
+                        <div class="w-1 h-full min-h-[20px] bg-amber-400/40 rounded-full mt-1.5 flex-shrink-0"></div>
                         <div>
-                            <h3 class="font-medium">验证设计参数</h3>
-                            <p class="text-gray-600 text-sm">通过监测数据验证支护结构设计的合理性，反馈设计参数，优化施工方案。</p>
+                            <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">当前作业面</span>
+                            <p class="font-semibold">第2层土方开挖作业面</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-line-chart text-primary text-xl mt-1 mr-3"></i>
+                    <div class="flex items-start gap-3">
+                        <div class="w-1 h-full min-h-[20px] bg-rose-400/40 rounded-full mt-1.5 flex-shrink-0"></div>
                         <div>
-                            <h3 class="font-medium">指导现场施工</h3>
-                            <p class="text-gray-600 text-sm">根据监测数据指导土方开挖、支撑安装的步序，实现信息化施工，保障施工效率。</p>
+                            <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">项目目标</span>
+                            <p class="font-semibold">沉浸式施工安全监测培训</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-bell text-primary text-xl mt-1 mr-3"></i>
+                    <div class="flex items-start gap-3">
+                        <div class="w-1 h-full min-h-[20px] bg-violet-400/40 rounded-full mt-1.5 flex-shrink-0"></div>
                         <div>
-                            <h3 class="font-medium">提前预警风险</h3>
-                            <p class="text-gray-600 text-sm">建立预警机制，及时发现异常情况，提前采取措施，避免杭州湘湖站、佛山万科基坑这类安全事故的发生。</p>
+                            <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">互动平台</span>
+                            <p class="font-semibold">VR全景漫游系统</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-file-text-o text-primary text-xl mt-1 mr-3"></i>
+                    <div class="flex items-start gap-3">
+                        <div class="w-1 h-full min-h-[20px] bg-cyan-400/40 rounded-full mt-1.5 flex-shrink-0"></div>
                         <div>
-                            <h3 class="font-medium">留存过程资料</h3>
-                            <p class="text-gray-600 text-sm">完整留存监测过程数据，为工程验收、后续运维提供完整的过程资料。</p>
+                            <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">核心功能</span>
+                            <p class="font-semibold">全景漫游、隐患排查、任务引导</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3. 作业依据 -->
-        <section id="section3" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                3. 作业依据
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <ul class="space-y-2 text-gray-600">
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑基坑工程监测技术标准》GB 50497-2019</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《城市轨道交通工程测量规范》GB 50308-2017</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑变形测量规范》JGJ 8-2016</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑基坑支护技术规程》JGJ120－2012</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《深圳市基坑支护技术规范》SJG05-2011</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《建筑地基基础设计规范》GBJ50007-2011</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《施工现场临时用电安全技术规范》JGJ 46-2005</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>《城市轨道交通工程安全质量管理暂行办法》</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>本项目的岩土工程勘察报告</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>本项目的基坑支护设计图纸、主体结构设计图纸</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>本项目的施工组织设计与专项施工方案</li>
-                    <li><i class="fa fa-check text-green-500 mr-2"></i>业主及监理单位的相关管理要求</li>
-                </ul>
+        <!-- ===== 项目现场布局 ===== -->
+        <section id="site-layout" class="mb-12 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="icon-ring bg-emerald-50 text-emerald-600">
+                    <i class="fa fa-map-marker text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">项目现场布局</h2>
+                    <div class="section-underline"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- 西南侧 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <h3 class="font-semibold">西南侧：车辆进出口</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        项目的车辆通行管控区，设置泥沙冲洗区与放行闸口，承担土方外运、材料进场的全流程管控，是文明施工核心点位。
+                    </p>
+                </div>
+                <!-- 南侧&东南侧 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa fa-building"></i>
+                        </div>
+                        <h3 class="font-semibold">南侧&东南侧：办公与仓库</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        现场管理中枢，包含项目部办公用房、监理值班室、应急物资库与周转材料仓库，负责施工管理与应急调度。
+                    </p>
+                </div>
+                <!-- 东侧 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa fa-cubes"></i>
+                        </div>
+                        <h3 class="font-semibold">东侧：标准化材料堆放区</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        分区码放粉煤灰、水泥砖、工字型钢等主材，按规范定置化管理，配套材料进场验收与质量追溯点位。
+                    </p>
+                </div>
+                <!-- 北侧 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa fa-cogs"></i>
+                        </div>
+                        <h3 class="font-semibold">北侧：核心施工要道</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        本阶段核心作业面，多台挖掘机同步开展第2层土方开挖，配套开挖动态监测点位，实时管控开挖步序与变形风险。
+                    </p>
+                </div>
+                <!-- 西侧 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                        <h3 class="font-semibold">西侧：用电与支护材料区</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        设置现场专用小型变电器，保障全现场施工用电；分区码放L型钢、钢支撑、钢管等支护体系专用材料。
+                    </p>
+                </div>
+                <!-- 中间 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa fa-arrows-alt"></i>
+                        </div>
+                        <h3 class="font-semibold">基坑中部：龙门吊作业区</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        东西侧中间架设龙门式起重机，负责现场材料吊装与土方转运，保障施工工序无缝衔接。
+                    </p>
+                </div>
             </div>
         </section>
 
-        <!-- 4. 监测主要工作内容 -->
-        <section id="section4" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                4. 监测主要工作内容
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <p class="mb-4 text-gray-600">本次监测工作采用"人工+自动化"结合的模式，共部署13类监测设备，覆盖基坑本体、周边环境、施工环境三大类监测内容：</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- 轴力计 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-arrows-v text-primary mr-2"></i>
-                            <h3 class="font-medium">轴力计</h3>
+        <!-- ===== 核心施工工艺 ===== -->
+        <section id="construction" class="mb-12 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="icon-ring bg-amber-50 text-amber-600">
+                    <i class="fa fa-cog text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">核心施工工艺知识点</h2>
+                    <div class="section-underline"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- 支护体系 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-50 overflow-hidden card-lift">
+                    <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-400"></div>
+                    <div class="p-5">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-4 mx-auto">
+                            <i class="fa fa-shield"></i>
                         </div>
-                        <p class="text-gray-600 text-sm">监测钢支撑的轴力，判断支撑受力是否稳定，排查失稳风险。</p>
+                        <h3 class="font-semibold text-center mb-4">核心支护体系</h3>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">地下连续墙：挡土止水第一道防线</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">钢支撑+围檩：水平受力核心，控制变形</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">格构柱：竖向支点，防止支撑失稳</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">完整受力闭环，保障基坑安全</span>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- 扬尘系统 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-cloud text-primary mr-2"></i>
-                            <h3 class="font-medium">扬尘监测系统</h3>
+                </div>
+                <!-- 主体结构 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-50 overflow-hidden card-lift">
+                    <div class="h-2 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
+                    <div class="p-5">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mb-4 mx-auto">
+                            <i class="fa fa-building-o"></i>
                         </div>
-                        <p class="text-gray-600 text-sm">实时监测施工现场的PM2.5、PM10等扬尘指标，管控文明施工。</p>
+                        <h3 class="font-semibold text-center mb-4">主体结构基础</h3>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">主体底板：封底止水，承载主体荷载</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">阻断地下水渗透，保障干场作业</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">钢筋接驳器：侧墙施工可靠连接</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">止水构造：保障结构防水与整体性</span>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- 裂缝监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-minus text-primary mr-2"></i>
-                            <h3 class="font-medium">裂缝监测</h3>
+                </div>
+                <!-- 运输系统 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-50 overflow-hidden card-lift">
+                    <div class="h-2 bg-gradient-to-r from-violet-500 to-violet-400"></div>
+                    <div class="p-5">
+                        <div class="w-12 h-12 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center text-2xl mb-4 mx-auto">
+                            <i class="fa fa-exchange"></i>
                         </div>
-                        <p class="text-gray-600 text-sm">监测周边建筑物、围护结构的裂缝发展，及时发现开裂风险。</p>
-                    </div>
-                    <!-- 全站仪 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-crosshairs text-primary mr-2"></i>
-                            <h3 class="font-medium">全站仪（测量机器人）</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">监测围护墙顶水平位移、立柱位移，实现高精度自动化位移测量。</p>
-                    </div>
-                    <!-- 倾角计 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-exchange text-primary mr-2"></i>
-                            <h3 class="font-medium">倾角计</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">监测钢支撑、格构柱的倾角变化，排查支撑倾斜失稳风险。</p>
-                    </div>
-                    <!-- 静力水准 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-tint text-primary mr-2"></i>
-                            <h3 class="font-medium">静力水准</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">自动化监测周边建筑物、立柱的沉降，实现高精度沉降测量。</p>
-                    </div>
-                    <!-- GNSS -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-map-marker text-primary mr-2"></i>
-                            <h3 class="font-medium">GNSS监测</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">自动化监测周边建筑物的三维位移，实时掌握建筑变形情况。</p>
-                    </div>
-                    <!-- 测斜 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-arrows-h text-primary mr-2"></i>
-                            <h3 class="font-medium">测斜仪</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">监测地下连续墙、周边土体的深层水平位移，掌握深层变形。</p>
-                    </div>
-                    <!-- 雨量计 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-umbrella text-primary mr-2"></i>
-                            <h3 class="font-medium">雨量计</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">实时监测降雨量，为降雨期间的基坑安全管控提供数据支撑。</p>
-                    </div>
-                    <!-- 水位计 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-water text-primary mr-2"></i>
-                            <h3 class="font-medium">水位计</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">监测基坑内外的地下水位变化，掌握水位波动对基坑的影响。</p>
-                    </div>
-                    <!-- 锚索 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-chain text-primary mr-2"></i>
-                            <h3 class="font-medium">锚索测力计</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">监测锚索的内力，判断锚索的受力状态，保障支护安全。</p>
-                    </div>
-                    <!-- 应变计 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-compress text-primary mr-2"></i>
-                            <h3 class="font-medium">应变计</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">监测围护结构、支撑的应变变化，掌握结构的受力变形。</p>
-                    </div>
-                    <!-- 钢筋计 -->
-                    <div class="p-4 border border-gray-100 rounded-lg hover:border-primary/30 transition-colors">
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-circle-o text-primary mr-2"></i>
-                            <h3 class="font-medium">钢筋计</h3>
-                        </div>
-                        <p class="text-gray-600 text-sm">监测围护结构、主体结构的钢筋内力，掌握钢筋的受力状态。</p>
+                        <h3 class="font-semibold text-center mb-4">施工配套与运输</h3>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">门式起重机：核心垂直运输设备</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">物料转运：钢筋、模板、钢支撑下放</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">土方外运：开挖土方垂直提升</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span class="text-sm text-gray-600">提升转运效率，保障工序衔接</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. 监测频率及控制指标 -->
-        <section id="section5" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                5. 监测频率及控制指标
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <h3 class="font-medium mb-3">5.1 监测频率</h3>
-                <div class="overflow-x-auto mb-6">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">施工阶段</th>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">监测频率</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-4 py-2 text-sm">土方开挖阶段</td>
-                                <td class="px-4 py-2 text-sm">1次/天，关键部位2次/天</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">开挖深度5~10m</td>
-                                <td class="px-4 py-2 text-sm">1次/天</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">开挖深度超过10m</td>
-                                <td class="px-4 py-2 text-sm">2次/天</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">开挖完成后7天内</td>
-                                <td class="px-4 py-2 text-sm">1次/2天</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">开挖完成后7~30天</td>
-                                <td class="px-4 py-2 text-sm">1次/周</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">开挖完成30天后</td>
-                                <td class="px-4 py-2 text-sm">1次/月，直至主体结构回填完成</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">支撑拆除期间</td>
-                                <td class="px-4 py-2 text-sm">1次/天，拆除完成后3天内</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!-- ===== VR全景可拓展监测任务点 ===== -->
+        <section id="vr-tasks" class="mb-12 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="icon-ring bg-rose-50 text-rose-600">
+                    <i class="fa fa-tasks text-lg"></i>
                 </div>
-
-                <h3 class="font-medium mb-3">5.2 监测控制指标</h3>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">监测项目</th>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">累计控制值</th>
-                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">速率控制值</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-4 py-2 text-sm">周边建筑物沉降</td>
-                                <td class="px-4 py-2 text-sm">≤20mm</td>
-                                <td class="px-4 py-2 text-sm">≤0.2mm/d</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">围护墙顶水平位移</td>
-                                <td class="px-4 py-2 text-sm">≤30mm</td>
-                                <td class="px-4 py-2 text-sm">≤3mm/d</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">围护结构深层水平位移</td>
-                                <td class="px-4 py-2 text-sm">≤40mm</td>
-                                <td class="px-4 py-2 text-sm">≤3mm/d</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">钢支撑轴力</td>
-                                <td class="px-4 py-2 text-sm">≤0.8fyk（设计值）</td>
-                                <td class="px-4 py-2 text-sm">≤10%设计值/天</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 text-sm">地下水位变化</td>
-                                <td class="px-4 py-2 text-sm">≤1000mm</td>
-                                <td class="px-4 py-2 text-sm">≤500mm/d</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div>
+                    <h2 class="text-xl font-bold">VR全景可拓展监测任务点</h2>
+                    <div class="section-underline"></div>
                 </div>
             </div>
-        </section>
-
-        <!-- 6. 监测方法 -->
-        <section id="section6" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                6. 监测方法
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- GNSS监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-map-marker text-primary mr-2"></i>GNSS自动化监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            在周边建筑物顶部布设GNSS监测点，采用GNSS实时动态测量技术，实现24小时不间断的三维位移监测，
-                            采样频率1Hz，实时传输数据到监测平台，精度可达±2mm+1ppm。
-                        </p>
-                    </div>
-                    <!-- 测斜监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-arrows-h text-primary mr-2"></i>测斜监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            在地下连续墙内预埋测斜管，采用固定杆式测斜仪，逐段测量不同深度的水平位移，
-                            掌握围护结构的深层变形情况，测量精度可达±0.1mm/500mm，实现24小时实时监测。
-                        </p>
-                    </div>
-                    <!-- 轴力监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-arrows-v text-primary mr-2"></i>轴力计监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            在钢支撑端部安装振弦式轴力计，安装前进行标定，支撑安装完成后读取初始值，
-                            后续监测读取频率值，换算得到支撑的轴力，实时掌握支撑的受力状态，精度可达0.1%F.S。
-                        </p>
-                    </div>
-                    <!-- 静力水准监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-tint text-primary mr-2"></i>静力水准监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            采用连通管原理，在建筑物、立柱上布设静力水准测点，自动化监测各点的相对沉降，
-                            实现24小时不间断监测，测量精度可达±0.1mm，适合长距离的沉降监测。
-                        </p>
-                    </div>
-                    <!-- 全站仪监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-crosshairs text-primary mr-2"></i>测量机器人监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            采用徕卡TM50高精度全站仪，采用极坐标法测量围护结构顶、立柱的水平位移，
-                            实现自动照准、自动测量，24小时不间断监测，测角精度1″，测距精度1mm+1.5ppm。
-                        </p>
-                    </div>
-                    <!-- 水位监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-water text-primary mr-2"></i>水位计监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            在基坑内外布设水位观测孔，安装振弦式水位计，实时监测地下水位的变化，
-                            掌握水位的波动情况，为降水、降雨期间的安全管控提供数据，精度可达±0.1%F.S。
-                        </p>
-                    </div>
-                    <!-- 其他监测 -->
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-umbrella text-primary mr-2"></i>雨量、扬尘监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            安装一体化的环境监测站，集成雨量计、扬尘传感器，实时监测降雨量、PM2.5、PM10等指标，
-                            数据实时上传，为文明施工、降雨期安全管控提供支撑。
-                        </p>
-                    </div>
-                    <div class="p-4 border border-gray-100 rounded-lg">
-                        <h3 class="font-medium mb-2 flex items-center">
-                            <i class="fa fa-minus text-primary mr-2"></i>裂缝、倾角、应变监测
-                        </h3>
-                        <p class="text-gray-600 text-sm">
-                            采用振弦式传感器，在裂缝、支撑、结构上安装对应的监测设备，实时监测裂缝的发展、
-                            支撑的倾角、结构的应变，掌握结构的受力变形情况，及时发现异常。
-                        </p>
+            <p class="text-gray-500 mb-6 text-sm">以下任务点均可在VR全景中实现点击互动，作为培训考核的任务环节：</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- 任务1 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-building"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-sm">周边建筑物沉降监测复核</h3>
+                                <span class="task-tag bg-blue-50 text-blue-600">任务1</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                点击西南侧高层建筑物，查看沉降监测的实时数据，复核沉降速率是否符合规范要求，判断是否存在超标风险。
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- 7. 信息化管理 -->
-        <section id="section7" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                7. 信息化管理
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <p class="mb-4">本项目采用全自动化的监测信息化管理平台，实现监测数据的实时采集、传输、处理、展示与预警，同时配套手机APP实现移动管理，具体功能如下：</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="flex items-start">
-                        <i class="fa fa-wifi text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">实时数据传输</h3>
-                            <p class="text-gray-600 text-sm">所有自动化监测设备的数据，通过4G/5G网络实时传输到云端平台，延迟不超过1分钟，实现数据的实时同步。</p>
+                <!-- 任务2 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-tint"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-sm">地下连续墙渗流隐患排查</h3>
+                                <span class="task-tag bg-cyan-50 text-cyan-600">任务2</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                点击南侧地下连续墙，查看接缝处的渗流情况，排查施工遗留的清刷不彻底、砼浇注不连续等隐患，定位预警诱因。
+                            </p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-line-chart text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">数据可视化展示</h3>
-                            <p class="text-gray-600 text-sm">平台支持数据的可视化展示，包括变形曲线、内力曲线、历史数据对比，直观展示监测数据的变化趋势。</p>
+                </div>
+                <!-- 任务3 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-arrows-v"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-sm">钢支撑轴力监测核查</h3>
+                                <span class="task-tag bg-amber-50 text-amber-600">任务3</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                点击基坑内的红色钢支撑，查看轴力监测的实时数据，判断支撑受力是否稳定，是否存在轴力超标或失稳风险。
+                            </p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-file-text text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">自动报表生成</h3>
-                            <p class="text-gray-600 text-sm">平台自动生成日、周、月监测报表，自动整理数据、曲线，无需人工整理，提高工作效率。</p>
+                </div>
+                <!-- 任务4 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-digger"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-sm">土方开挖步序合规性检查</h3>
+                                <span class="task-tag bg-orange-50 text-orange-600">任务4</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                点击北侧的开挖作业面，查看当前开挖的步序、分层厚度，复核是否符合"分层分段、留土护壁"的规范要求，排查超挖风险。
+                            </p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-map text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">三维可视化展示</h3>
-                            <p class="text-gray-600 text-sm">结合VR全景模型，将监测数据叠加到全景模型中，直观展示各个测点的实时数据，实现沉浸式的监测数据查看。</p>
+                </div>
+                <!-- 任务5 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-sm">支护材料进场验收复核</h3>
+                                <span class="task-tag bg-emerald-50 text-emerald-600">任务5</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                点击西侧的支护材料堆放区，查看材料的进场验收记录、质量检测报告，复核钢支撑、钢管的材质是否符合设计要求。
+                            </p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-mobile text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">手机APP移动管理</h3>
-                            <p class="text-gray-600 text-sm">配套专属手机APP，支持项目查看、数据查询、曲线分析、巡检记录、报警管理，随时随地掌握项目情况。</p>
+                </div>
+                <!-- 任务6 -->
+                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-50 card-lift">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-bolt"></i>
                         </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-users text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">多端协同管理</h3>
-                            <p class="text-gray-600 text-sm">平台支持PC端、移动端、平板端的访问，项目负责人、监理、业主可以随时查看监测数据，实现协同管理。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-history text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">历史数据追溯</h3>
-                            <p class="text-gray-600 text-sm">所有监测数据都永久留存，支持历史数据的追溯、查询，为工程的全过程管理提供完整的数据支撑。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-book text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">知识库管理</h3>
-                            <p class="text-gray-600 text-sm">平台内置知识库，可上传规范、方案、培训资料，供监测人员学习，统一管理技术资料。</p>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-sm">施工用电安全监测排查</h3>
+                                <span class="task-tag bg-yellow-50 text-yellow-600">任务6</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                点击西侧的小型变电器，查看用电监测的实时数据，复核接地电阻、漏电保护是否正常，排查临时用电的安全隐患。
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 8. 预警报警机制和异常情况处理措施 -->
-        <section id="section8" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                8. 预警报警机制和异常情况处理措施
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <h3 class="font-medium mb-3">8.1 三级预警机制</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div class="p-4 border border-yellow-200 rounded-lg bg-yellow-50">
-                        <div class="text-center mb-2">
-                            <span class="inline-block px-3 py-1 bg-yellow-500 text-white rounded-full text-sm">黄色预警</span>
-                        </div>
-                        <p class="text-center text-sm">监测数据达到控制值的70%~80%</p>
-                        <p class="text-center text-gray-600 text-xs mt-2">注意关注，加密监测频率</p>
-                    </div>
-                    <div class="p-4 border border-orange-200 rounded-lg bg-orange-50">
-                        <div class="text-center mb-2">
-                            <span class="inline-block px-3 py-1 bg-orange-500 text-white rounded-full text-sm">橙色预警</span>
-                        </div>
-                        <p class="text-center text-sm">监测数据达到控制值的80%~100%</p>
-                        <p class="text-center text-gray-600 text-xs mt-2">预警提醒，分析原因，采取措施</p>
-                    </div>
-                    <div class="p-4 border border-red-200 rounded-lg bg-red-50">
-                        <div class="text-center mb-2">
-                            <span class="inline-block px-3 py-1 bg-red-500 text-white rounded-full text-sm">红色预警</span>
-                        </div>
-                        <p class="text-center text-sm">监测数据超过控制值</p>
-                        <p class="text-center text-gray-600 text-xs mt-2">紧急报警，停工整改，启动应急预案</p>
-                    </div>
+        <!-- ===== 全景漫游功能 ===== -->
+        <section id="roam" class="mb-10 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="icon-ring bg-violet-50 text-violet-600">
+                    <i class="fa fa-street-view text-lg"></i>
                 </div>
-
-                <h3 class="font-medium mb-3">8.2 异常情况处理措施</h3>
-                <ul class="space-y-3 text-gray-600">
-                    <li class="flex items-start">
-                        <i class="fa fa-bell text-primary mt-1 mr-2"></i>
-                        <div>
-                            <span class="font-medium">预警通知：</span>
-                            当监测数据触发预警时，平台会自动通过短信、微信、平台消息、APP推送的方式，向项目负责人、监理、业主发送预警通知，确保第一时间收到信息。
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-search text-primary mt-1 mr-2"></i>
-                        <div>
-                            <span class="font-medium">原因排查：</span>
-                            收到预警后，立即组织技术人员到现场排查原因，复核监测数据的准确性，分析异常的诱因，判断风险的等级。
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-pause text-primary mt-1 mr-2"></i>
-                        <div>
-                            <span class="font-medium">施工暂停：</span>
-                            当触发橙色及以上预警时，立即暂停相关区域的施工作业，人员撤离到安全区域，避免风险扩大。
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-wrench text-primary mt-1 mr-2"></i>
-                        <div>
-                            <span class="font-medium">应急处置：</span>
-                            根据异常的原因，采取对应的应急措施，比如增加临时支撑、加快支撑安装、降水调整、注浆加固等，控制风险的发展。
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-refresh text-primary mt-1 mr-2"></i>
-                        <div>
-                            <span class="font-medium">加密监测：</span>
-                            异常处理期间，加密监测频率，实时监测数据的变化，评估处置措施的效果，直到数据恢复正常。
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
-                        <div>
-                            <span class="font-medium">复盘总结：</span>
-                            异常处理完成后，组织复盘总结，分析异常的原因，总结经验，优化后续的施工与监测方案，避免类似问题再次发生。
-                        </div>
-                    </li>
-                </ul>
+                <div>
+                    <h2 class="text-xl font-bold">全景漫游功能</h2>
+                    <div class="section-underline"></div>
+                </div>
             </div>
-        </section>
-
-        <!-- 9. 质量保证体系、主要质量保证措施 -->
-        <section id="section9" class="mb-10">
-            <h2 class="text-xl font-semibold mb-4 section-title">
-                9. 质量保证体系、主要质量保证措施
-            </h2>
-            <div class="bg-white rounded-lg p-6 card-shadow">
-                <h3 class="font-medium mb-3">9.1 质量保证体系</h3>
-                <p class="text-gray-600 mb-4">
-                    建立以项目负责人为第一责任人的质量保证体系，明确各个岗位的质量职责，
-                    从人员、设备、流程、数据四个方面建立全流程的质量管控体系，保障监测工作的质量，
-                    避免出现杭州湘湖站这类监测失效、数据造假的问题。
-                </p>
-
-                <h3 class="font-medium mb-3">9.2 主要质量保证措施</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="flex items-start">
-                        <i class="fa fa-user text-primary text-xl mt-1 mr-3"></i>
+            <div class="bg-gradient-to-br from-white via-white to-blue-50/50 rounded-xl p-6 md:p-8 shadow-sm border border-gray-50">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- 语音引导 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-volume-up"></i>
+                        </div>
                         <div>
-                            <h3 class="font-medium">人员资质保证</h3>
-                            <p class="text-gray-600 text-sm">所有监测人员都具备相应的资质，持证上岗，经过专业的培训，熟悉监测的流程与规范，具备丰富的基坑监测经验。</p>
+                            <h3 class="font-semibold mb-1">分段语音引导</h3>
+                            <p class="text-gray-500 text-sm">每个场景独立语音，专业男声音色，全程风格统一</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-cog text-primary text-xl mt-1 mr-3"></i>
+                    <!-- 字幕 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-closed-captioning"></i>
+                        </div>
                         <div>
-                            <h3 class="font-medium">设备校准保证</h3>
-                            <p class="text-gray-600 text-sm">所有监测设备都经过法定计量机构的校准，校准证书在有效期内，设备安装前进行标定，保障测量的准确性。</p>
+                            <h3 class="font-semibold mb-1">同步字幕展示</h3>
+                            <p class="text-gray-500 text-sm">每10秒自动分段，语音字幕进度完全匹配</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-check-square-o text-primary text-xl mt-1 mr-3"></i>
+                    <!-- 互动 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-mouse-pointer"></i>
+                        </div>
                         <div>
-                            <h3 class="font-medium">流程质量保证</h3>
-                            <p class="text-gray-600 text-sm">严格按照规范的流程开展监测工作，测点安装、初始值读取、日常监测、数据处理都严格遵循规范要求，保障流程合规。</p>
+                            <h3 class="font-semibold mb-1">场景触发互动</h3>
+                            <p class="text-gray-500 text-sm">视角转动自动触发对应引导，沉浸式漫游体验</p>
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-database text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">数据审核保证</h3>
-                            <p class="text-gray-600 text-sm">所有监测数据都经过三级审核，监测人员自检、技术负责人复检、项目负责人终审，保障数据的准确性，杜绝数据造假。</p>
+                    <!-- 自由浏览 -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa fa-hand-pointer-o"></i>
                         </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-eye text-primary text-xl mt-1 mr-3"></i>
                         <div>
-                            <h3 class="font-medium">现场巡检保证</h3>
-                            <p class="text-gray-600 text-sm">每天安排专人对监测设备进行巡检，检查设备的运行状态、供电、网络是否正常，及时发现设备的故障，保障设备正常运行。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-wrench text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">系统运维保证</h3>
-                            <p class="text-gray-600 text-sm">建立完善的系统运维方案，每季度进行预防性巡检，提供24小时应急响应，省内24小时、省外48小时到达现场，保障系统稳定。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-book text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">资料管理保证</h3>
-                            <p class="text-gray-600 text-sm">所有的监测资料都统一整理、归档，包括原始数据、报表、报告、设备校准证书等，保障资料的完整、可追溯。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fa fa-life-ring text-primary text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h3 class="font-medium">应急保障保证</h3>
-                            <p class="text-gray-600 text-sm">建立应急保障小组，准备充足的备品备件，针对高风险测点提前制定应急预案，保障设备故障时可以快速修复。</p>
+                            <h3 class="font-semibold mb-1">自由浏览模式</h3>
+                            <p class="text-gray-500 text-sm">任务完成后可切换自由浏览，自主探索现场</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 页脚 -->
-        <footer class="text-center text-gray-500 text-sm">
-            <p class="mt-1">© 2026 地铁车站明挖法施工基坑监测专项方案</p>
+        <!-- ===== Footer ===== -->
+        <footer class="text-center py-8 border-t border-gray-100">
+            <div class="flex flex-col items-center gap-2">
+                <div class="flex items-center gap-2 text-gray-400 text-sm">
+                    <i class="fa fa-github"></i>
+                    <span>静态HTML · 可直接部署到 GitHub Pages</span>
+                </div>
+                <p class="text-gray-400 text-xs">© 2026 地铁车站明挖法施工VR全景监测项目</p>
+            </div>
         </footer>
+
     </div>
 
-    <!-- 平滑滚动脚本 -->
     <script>
-        // 实现锚点的平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // ===== Back to Top =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            backToTop.classList.toggle('show', window.scrollY > 400);
+        });
+
+        // ===== Sticky nav scroll shadow =====
+        const stickyNav = document.getElementById('stickyNav');
+        window.addEventListener('scroll', function() {
+            stickyNav.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // ===== Smooth scroll for nav links =====
+        document.querySelectorAll('.sticky-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    const offset = 70;
+                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
             });
+        });
+
+        // ===== Scroll-triggered entrance animation (Intersection Observer) =====
+        const observerOptions = { threshold: 0.08, rootMargin: '0px 0px -40px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card-lift').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `opacity 0.5s ease ${i * 0.04}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.04}s`;
+            observer.observe(el);
         });
     </script>
 </body>
